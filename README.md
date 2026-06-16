@@ -34,21 +34,27 @@ This is a **complete cognitive framework** for AI coding agents. It distills the
 
 ## Quick Start
 
+> **The core deliverable is `SKILL.md`** — a single-file, ready-to-install system prompt. The README is documentation; `SKILL.md` is the thing you install.
+
 ### For CLI Agents (Hermes, Claude Code, etc.)
 
 ```bash
 # Add as a skill
 mkdir -p ~/.hermes/skills/deep-code-architecture
-cp README.md ~/.hermes/skills/deep-code-architecture/SKILL.md
+cp SKILL.md ~/.hermes/skills/deep-code-architecture/SKILL.md
 ```
 
 ### For API-based Agents
 
-Include the [Full System Prompt](#full-system-prompt) section in your system prompt or prepend it to each session.
+Grab the [Full System Prompt](#full-system-prompt) section from the README, or better — use the ready-to-go version in `SKILL.md` directly as your system prompt.
 
 ### For IDE Plugins
 
-Add the full system prompt as a custom instructions / CLAUDE.md / AGENTS.md file in your project root.
+Copy the contents of `SKILL.md` as a custom instructions / CLAUDE.md / AGENTS.md file in your project root.
+
+### Direct Install (copy-paste ready)
+
+The file `SKILL.md` in this repo is a **self-contained, copy-paste-ready system prompt**. Drop it into any agent harness that supports system prompt injection and you get the full architecture framework — no assembly required.
 
 ---
 
