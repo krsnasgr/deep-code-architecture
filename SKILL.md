@@ -140,17 +140,26 @@ Before writing code, verify the plan:
 3. Does it reuse existing patterns where possible?
 4. Is there a simpler approach you dismissed too quickly?
 
-### Phase 4: Execute
+### Phase 4: Refine & Approve
 
-Implement following the plan. If something discovered mid-implementation invalidates the plan, pause and re-plan rather than forcing a bad approach.
+Present the plan for user review. If feedback comes back:
+- **Approved:** Proceed to execution
+- **Corrections given:** Revise the plan and present again
+- **Plan invalidated mid-execution:** Pause, re-plan, present again
+Do not skip this phase — executing an unapproved plan wastes more time than asking for feedback.
 
-### Phase 5: Verify
+### Phase 5: Execute
+
+Implement following the approved plan. If something discovered mid-implementation invalidates the plan, pause and re-plan rather than forcing a bad approach.
+
+### Phase 6: Verify
 
 After implementation:
-1. Run code review on your own diff (see Section 5)
-2. Run tests
-3. Verify edge cases
-4. Report results truthfully
+1. Walk through the multi-angle code review process in your reasoning (see Section 5)
+2. Fix any confirmed issues before continuing
+3. Run tests — investigate failures, don't dismiss as "unrelated"
+4. Run typechecks — investigate errors
+5. Report results truthfully
 
 ---
 
@@ -174,10 +183,10 @@ After implementation:
 | Write operations | Serial per file to avoid conflicts |
 | Verification | Can run alongside writes on different file areas |
 
-**Prefer your built-in tools over shell commands where they exist:**
-- Read files with your read function, not shell `cat`
-- Search content with your search/grep function, not shell `grep`
-- Write files with your write function, not shell `echo >`
+**Prefer your available functions over shell commands where they exist:**
+- Use your file-reading function over shell `cat`
+- Use your search/grep function over shell `grep`
+- Use your file-writing function over shell `echo >`
 
 **Use shell/terminal for:**
 - Running tests, builds, linters
@@ -188,7 +197,7 @@ After implementation:
 
 ### Git Discipline
 
-- Never `git add .` or `git add -A` — only stage files you actually changed
+- If git is available: never `git add .` or `git add -A` — only stage files you actually changed
 - Never skip git hooks with `--no-verify`
 - Never force-push unless explicitly instructed
 - Write clear, descriptive commit messages
@@ -241,6 +250,14 @@ Hunt for the well-known traps of the diff's language or framework:
 
 Is each change implemented at the right level of abstraction? A fix that works in the view layer might belong in the model, or a quick patch in a button handler might need to live in a service.
 
+### Angle F — Conventions Check
+
+Does the change break any established project conventions? Check:
+- Does the project have a CLAUDE.md, AGENTS.md, or .cursorrules with rules this diff violates?
+- Does the code match the surrounding style, naming, and file organization?
+- Are there patterns in similar files that this change should follow?
+- Are imports organized per project conventions?
+
 ### Verification: 3-State Classification
 
 After identifying candidate issues, classify each:
@@ -251,7 +268,7 @@ After identifying candidate issues, classify each:
 ### Post-Implementation Self-Review Checklist
 
 After every code change:
-1. Run your code review angles on your own diff
+1. Walk through the multi-angle code review process in your reasoning (Section 5)
 2. Fix any confirmed issues before continuing
 3. Run the project's tests — investigate failures, don't dismiss as "unrelated"
 4. Run typechecks — investigate errors
@@ -260,9 +277,9 @@ After every code change:
 
 ---
 
-## 6. DeepSeek Memory & Learning Protocol
+## 6. Memory & Learning Protocol
 
-DeepSeek models benefit from structured memory management. Use this protocol to persist learnings across sessions.
+DeepSeek models benefit from structured memory management. Use this protocol when your harness supports persistent memory (file-based, vector DB, or API-provided). If memory isn't available, skip to Section 7 — the thinking protocol (Section 1) serves as working memory.
 
 ### What to Save
 
@@ -287,20 +304,9 @@ Recalled memories reflect what was true when written. Before acting on a memory:
 
 ---
 
-## 7. DeepSeek Reasoning-Driven Orchestration
+## 7. Reasoning-Driven Orchestration
 
-DeepSeek excels at sequential reasoning and structured problem decomposition. Use this section when work needs to span multiple coordinated phases — even within a single-agent context.
-
-### Task Decomposition Pattern
-
-Instead of spawning subagents (which DeepSeek doesn't support natively), decompose work into reasoning-driven phases:
-
-```
-Phase 1: Research — Read code, understand problem, gather facts
-Phase 2: Synthesize — Combine findings into a clear approach
-Phase 3: Implement — Write code following the approach
-Phase 4: Verify — Self-review, test, validate
-```
+DeepSeek excels at sequential reasoning and structured problem decomposition. This section covers patterns Section 3's planning doesn't — self-adversarial verification, parallel function calling strategy, and multi-step work management — all within a single-agent context.
 
 ### Parallel Work via Function Calling
 
@@ -433,6 +439,7 @@ Review your own diff from these independent angles:
 3. **Cross-file impact:** Do callers still work with the new signature?
 4. **Language-specific pitfalls:** Known traps of the language/framework being used
 5. **Altitude check:** Is each change at the right level of abstraction?
+6. **Conventions check:** Does the change violate project rules in CLAUDE.md/AGENTS.md?
 
 Classify findings: CONFIRMED (real bug), PLAUSIBLE (likely but unverified — keep), REFUTED (false positive — drop).
 
@@ -440,7 +447,7 @@ Classify findings: CONFIRMED (real bug), PLAUSIBLE (likely but unverified — ke
 
 - For multi-step tasks, maintain an explicit task list. One item in progress at a time.
 - Make independent function calls in parallel (multiple reads, independent operations).
-- Never `git add .` or skip hooks. Never force-push unless instructed.
+- If git is available: never `git add .` or skip hooks. Never force-push unless instructed.
 - Don't fix unrelated issues — suggest as follow-ups. Don't add unnecessary error handling.
 
 ## Action Safety
@@ -497,3 +504,4 @@ When using this skill with DeepSeek:
 | Worker instructions | Self-execution discipline |
 | Memory file format (frontmatter files) | Memory protocol (works with any memory system) |
 | Skill tool infrastructure | Skillification process (manual capture) |
+| Coordinator mode instructions | Retained as conventions check + self-adversarial reasoning |
