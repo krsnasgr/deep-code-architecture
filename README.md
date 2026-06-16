@@ -1,32 +1,35 @@
-# Deep Code Architecture
+# Deep Code Architecture (DeepSeek-Optimized)
 
-> **Transform any coding agent into a world-class software architect with deep planning, reasoning, and execution capabilities.**
+> **🧠 Transform any DeepSeek-powered coding agent into a world-class software architect — optimized for DeepSeek's reasoning tokens, function calling, and code generation strengths.**
 
-A comprehensive system prompt / skill for any AI coding agent that instills rigorous software architecture thinking, methodical planning, outcome-first communication, and multi-phase execution discipline.
+A comprehensive cognitive framework optimized specifically for **DeepSeek models** (DeepSeek V2/V3/R1/V4 Flash). Structured to leverage DeepSeek's visible thinking/reasoning tokens, strong code generation, and structured output capabilities. No multi-agent orchestration overhead — pure single-agent architectural reasoning.
 
 ## What This Is
 
-This is a **complete cognitive framework** for AI coding agents. It distills the architecture, planning, reasoning, and execution patterns used by elite software engineering agents into a single composable system prompt. Install it in any agent harness — CLI, IDE plugin, API wrapper — and the agent automatically adopts:
+This is a **complete cognitive framework** for AI coding agents, tuned for DeepSeek's architecture. It distills elite software engineering patterns (structured planning, multi-angle code review, execution discipline, action safety) into a format DeepSeek excels at:
 
-- **5-phase planning** — Explore → Design → Review → Finalize → Execute
+- **4-Phase Thinking Protocol** — Problem framing → Exploration → Decomposition → Self-verification (guides DeepSeek's reasoning tokens)
+- **5-Phase Planning** — Explore → Design → Review → Execute → Verify
 - **Outcome-first communication** — Lead with results, then details
-- **Multi-agent orchestration** — Fan out, verify adversarially, synthesize
-- **Memory-guided iteration** — Learn from corrections, never repeat mistakes
-- **Defense-in-depth code review** — Multi-angle finders, adversarial verification
-- **Skillification** — Convert any repeatable process into a reusable skill
+- **Single-agent orchestration** — Task decomposition through structured reasoning (not multi-agent)
+- **Multi-angle code review** — 5 independent finder angles with 3-state verification
+- **Self-adversarial "Second Opinion" pattern** — DeepSeek's reasoning used to find its own flaws
+- **Skillification** — Convert repeatable processes into reusable patterns
 
 ---
 
 ## Table of Contents
 
 - [Quick Start](#quick-start)
+- [DeepSeek Thinking Protocol](#deepseek-thinking-protocol)
 - [Core Identity & Mindset](#core-identity--mindset)
 - [Communication Style](#communication-style)
 - [5-Phase Plan Mode](#5-phase-plan-mode)
 - [Execution Discipline](#execution-discipline)
 - [Code Review System](#code-review-system)
 - [Memory & Learning](#memory--learning)
-- [Multi-Agent Orchestration](#multi-agent-orchestration)
+- [Self-Adversarial Reasoning](#self-adversarial-reasoning)
+- [Action Safety](#action-safety)
 - [Skillification](#skillification)
 - [Full System Prompt](#full-system-prompt)
 
@@ -34,7 +37,20 @@ This is a **complete cognitive framework** for AI coding agents. It distills the
 
 ## Quick Start
 
-> **The core deliverable is `SKILL.md`** — a single-file, ready-to-install system prompt. The README is documentation; `SKILL.md` is the thing you install.
+> **The core deliverable is `SKILL.md`** — a single-file, ready-to-install system prompt optimized for DeepSeek. The README is documentation; `SKILL.md` is the thing you install.
+
+### DeepSeek Quick Start (Recommended Settings)
+
+```yaml
+# Add SKILL.md content as your complete system prompt
+system_prompt: |
+  <paste entire contents of SKILL.md>
+
+# Recommended DeepSeek parameters:
+temperature: 0.3          # 0.2-0.4 for planning/review, 0.5-0.7 for creative design
+top_p: 0.9
+max_tokens: 16384         # Generous — DeepSeek's thinking + output needs room
+```
 
 ### For CLI Agents (Hermes, Claude Code, etc.)
 
